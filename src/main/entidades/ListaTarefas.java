@@ -1,8 +1,7 @@
 package entidades;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.function.Consumer;
+import java.util.*;
+import java.util.function.*;
 
 public class ListaTarefas {
     private Set<Tarefa> tarefas;
@@ -18,13 +17,11 @@ public class ListaTarefas {
         tarefas.add(new Tarefa(titulo, descricao, concluida, semanal, anual, diario, prioridade));
     }
 
-    public void exibirTarefaPorPrioridade(int prioridade) {
-        Consumer<Tarefa> imprimirTarefaPorPrioridade = tarefa -> {
-            if (tarefa.getPrioridade() == prioridade) {
-                System.out.println(tarefa);
-            }
-        };
+    public List<Tarefa> getTarefaComPrioridade(int prioridade) {
+        Predicate<Tarefa> igualPrioridade = tarefa -> tarefa.getPrioridade() == prioridade;
 
-        tarefas.stream().forEach(imprimirTarefaPorPrioridade);
+        List<Tarefa> tarefaComPrioridade = tarefas.stream().filter(igualPrioridade).toList();
+
+        return tarefaComPrioridade;
     }
 }

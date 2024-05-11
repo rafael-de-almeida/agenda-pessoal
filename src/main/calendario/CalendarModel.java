@@ -10,7 +10,7 @@ public class CalendarModel {
     private static Calendar cal = new GregorianCalendar();
 
     public CalendarModel() {
-        String[] columns = { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
+        String[] columns = { "Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab" };
         model = new DefaultTableModel(null, columns);
     }
 

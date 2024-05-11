@@ -26,7 +26,7 @@ public class Home {
         JPanel rightContainer = new JPanel();
         rightContainer.setLayout(new BoxLayout(rightContainer, BoxLayout.Y_AXIS));
 
-        JTable table = new JTable(calendarModel.getModel());
+        JTable table = new CalendarTable(calendarModel.getModel());
         table.setCellSelectionEnabled(true);
         JScrollPane pane = new JScrollPane(table);
 

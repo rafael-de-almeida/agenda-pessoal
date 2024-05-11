@@ -20,10 +20,16 @@ public class CalendarPanel {
         monthLabel.setText(calendarModel.getMonthName());
 
         JButton b1 = new JButton("<-");
-        b1.addActionListener(ae -> calendarModel.previousMonth());
+        b1.addActionListener(ae -> {
+            calendarModel.previousMonth();
+            updateMonth();
+        });
 
         JButton b2 = new JButton("->");
-        b2.addActionListener(ae -> calendarModel.nextMonth());
+        b2.addActionListener(ae -> {
+            calendarModel.nextMonth();
+            updateMonth();
+        });
 
         panel.add(b1, BorderLayout.WEST);
         panel.add(monthLabel, BorderLayout.CENTER);
