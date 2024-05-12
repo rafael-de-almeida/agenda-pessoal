@@ -1,60 +1,30 @@
 package entidades;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Evento {
-    private String titulo;
-    private String dataInicio;
-    private String dataFim;
+public class Evento extends ItemAgendado {
+    List<Convidado> convidados;
 
-    private String descricao;
-    private List<Convidado> convidados;
-    
-    public Evento(String titulo, String dataInicio,String dataFim, String descricao) {
-        this.titulo = titulo;
-        this.dataInicio = dataInicio;
-        this.dataFim = dataFim;
+    public Evento(String titulo, LocalDateTime dataInicio, LocalDateTime dataFim) {
+        super(titulo, dataInicio, dataFim);
         this.convidados = new ArrayList<>();
-        this.descricao = descricao;
     }
 
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public String getDataInicio() {
-        return dataInicio;
-    }
-
-    public void setDataInicio(String date) {
-        this.dataInicio = date;
-    }
-    
-    public String getDataFim() {
-        return dataFim;
-    }
-
-    public void setDataFim(String dataFim) {
-        this.dataFim = dataFim;
-    }
-
-    public void addConvidado(String nome){
-        convidados.add(new Convidado(nome));
+    public Evento(String titulo, LocalDateTime dataInicio, LocalDateTime dataFim, boolean semanal, boolean anual,
+            boolean diario, String descricao, List<Convidado> convidados) {
+        super(titulo, dataInicio, dataFim, semanal, anual, diario, descricao);
+        this.convidados = new ArrayList<>();
+        ;
     }
 
     @Override
     public String toString() {
-        return "Evento [titulo=" + titulo + ", date=" + dataInicio + ", descricao=" + descricao + ", convidados=" + convidados
-                + "]";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(" dd/MM/yyyy HH:mm");
+        return titulo + ", inicio=" + dataInicio.format(formatter) + ", fim: " + dataFim.format(formatter)
+                + ", descricao:" + descricao + ", convidados:" + convidados;
     }
 
-    
 }
