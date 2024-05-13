@@ -13,8 +13,8 @@ public class Tarefa extends ItemAgendado {
     }
 
     public Tarefa(String titulo, LocalDateTime dataInicio, LocalDateTime dataFim, boolean semanal, boolean anual,
-            boolean diario, String descricao, boolean concluida, int prioridade) {
-        super(titulo, dataInicio, dataFim, semanal, anual, diario, descricao);
+            boolean diario, boolean mensal, String descricao, boolean concluida, int prioridade) {
+        super(titulo, dataInicio, dataFim, semanal, anual, diario, mensal, descricao);
         this.concluida = concluida;
         this.prioridade = prioridade;
     }
@@ -33,6 +33,13 @@ public class Tarefa extends ItemAgendado {
 
     @Override
     public String toString() {
+        return "tarefa," + titulo + "," + dataInicio + "," + dataFim + ","
+                + descricao + "," + diario + "," + semanal + "," + mensal + "," + anual + "," + prioridade + ","
+                + concluida;
+    }
+
+    @Override
+    public String displayItem() {
         return titulo + ", descricao:" + descricao + "\n, prioridade:" + prioridade;
     }
 

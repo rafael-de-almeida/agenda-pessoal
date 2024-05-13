@@ -10,35 +10,43 @@ public abstract class ItemAgendado {
     protected String titulo;
     protected LocalDateTime dataInicio;
     protected LocalDateTime dataFim;
-    protected boolean semanal;
-    protected boolean anual;
     protected boolean diario;
+    protected boolean semanal;
+    protected boolean mensal;
+    protected boolean anual;
+
     protected String descricao;
 
     public ItemAgendado(String titulo, LocalDateTime dataInicio, LocalDateTime dataFim) {
         this.titulo = titulo;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
-        semanal = false;
-        anual = false;
         diario = false;
+        semanal = false;
+        mensal = false;
+        anual = false;
         descricao = "";
     }
 
     public ItemAgendado(String titulo, LocalDateTime dataInicio, LocalDateTime dataFim, boolean semanal, boolean anual,
-            boolean diario, String descricao) {
+            boolean diario, boolean mensal, String descricao) {
         this.titulo = titulo;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
-        this.semanal = semanal;
-        this.anual = anual;
         this.diario = diario;
+        this.semanal = semanal;
+        this.mensal = mensal;
+        this.anual = anual;
         this.descricao = descricao;
     }
 
     public String toString() {
-        return "ItemAgendado [titulo=" + titulo + ", dataInicio=" + dataInicio + ", dataFim=" + dataFim + ", descricao="
-                + descricao + "]";
+        return "ItemAgendado," + titulo + "," + dataInicio + "," + dataFim + ","
+                + descricao + "," + diario + "," + semanal + "," + mensal + "," + anual;
+    }
+
+    public String displayItem() {
+        return "item agendado" + titulo + descricao;
     }
 
     public String getTitulo() {

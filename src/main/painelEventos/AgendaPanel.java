@@ -9,12 +9,19 @@ import entidades.ListaItensAgendados;
 
 public class AgendaPanel extends JPanel {
 
-    public AgendaPanel(ListaItensAgendados listaItensAgendados) {
+    public AgendaPanel() {
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+    }
 
-        JList<String> list = new JList<>(listaItensAgendados.getItems());
+    public void update(ListaItensAgendados lista) {
+        this.removeAll();
+
+        JList<String> list = new JList<>(lista.getItems());
         JScrollPane scrollPane = new JScrollPane(list);
 
         this.add(scrollPane);
+
+        this.revalidate();
+        this.repaint();
     }
 }

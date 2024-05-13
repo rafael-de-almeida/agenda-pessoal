@@ -2,23 +2,18 @@ package calendario;
 
 import javax.swing.table.DefaultTableModel;
 
-import entidades.ListaItensAgendados;
-
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
-import java.util.Map;
 
 public class CalendarModel {
     private static DefaultTableModel model;
     private static Calendar cal = new GregorianCalendar();
-    Map<LocalDate, ListaItensAgendados> itemsAgendados;
 
     public CalendarModel() {
         String[] columns = { "Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab" };
         model = new DefaultTableModel(null, columns);
-        // this.itemsAgendados = tarefas;
     }
 
     public DefaultTableModel getModel() {
@@ -62,5 +57,11 @@ public class CalendarModel {
 
     public int getMonth() {
         return cal.get(Calendar.MONTH);
+    }
+
+    public LocalDate getLocalDate(int day) {
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH) + 1; // Calendar.MONTH é baseado em 0
+        return LocalDate.of(year, month, day);
     }
 }

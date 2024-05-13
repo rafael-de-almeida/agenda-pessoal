@@ -8,6 +8,6 @@ public class Convidado {
 
     public Convidado(String name) {
         this.name = name;
-    }  
-    
+    }
+
 }
