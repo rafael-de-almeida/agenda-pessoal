@@ -1,4 +1,4 @@
-package entidades;
+package org.agendaPessoal.entidades;
 
 import java.time.LocalDateTime;
 
@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
  * ScheduledItem
  * Author: Fábio-k
  */
-public abstract class ItemAgendado {
+public class ItemAgendado {
     protected String titulo;
     protected LocalDateTime dataInicio;
     protected LocalDateTime dataFim;
@@ -16,6 +16,17 @@ public abstract class ItemAgendado {
     protected boolean anual;
 
     protected String descricao;
+
+    public ItemAgendado(String titulo) {
+        this.titulo = titulo;
+        this.dataInicio = null;
+        this.dataFim = null;
+        diario = false;
+        semanal = false;
+        mensal = false;
+        anual = false;
+        descricao = "";
+    }
 
     public ItemAgendado(String titulo, LocalDateTime dataInicio, LocalDateTime dataFim) {
         this.titulo = titulo;

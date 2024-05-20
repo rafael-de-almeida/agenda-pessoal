@@ -1,11 +1,11 @@
-package painelEventos;
+package org.agendaPessoal.painelEventos;
 
 import javax.swing.BoxLayout;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import entidades.ListaItensAgendados;
+import org.agendaPessoal.entidades.ListaItensAgendados;
 
 public class AgendaPanel extends JPanel {
 

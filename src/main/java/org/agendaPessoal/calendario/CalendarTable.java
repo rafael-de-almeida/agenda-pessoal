@@ -1,4 +1,4 @@
-package calendario;
+package org.agendaPessoal.calendario;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -11,15 +11,16 @@ import java.util.Map;
 import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
 
-import entidades.ListaItensAgendados;
-import entidades.MapItensAgendados;
-import painelEventos.AgendaPanel;
+import org.agendaPessoal.entidades.ListaItensAgendados;
+import org.agendaPessoal.entidades.MapItensAgendados;
+import org.agendaPessoal.painelEventos.AgendaPanel;
 
 public class CalendarTable extends JTable {
     private static final Color SELECTED_COLOR = Color.GREEN;
     private static final Color DEFAULT_COLOR = Color.WHITE;
     private static final Color TEXT_COLOR = Color.BLACK;
     private static final Color SCHEDULED_COLOR = Color.CYAN;
+    private LocalDate selectedDate;
 
     private CalendarModel model;
     private MapItensAgendados mapItensAgendados;
@@ -30,50 +31,44 @@ public class CalendarTable extends JTable {
         this.mapItensAgendados = mapItensAgendados;
 
         LocalDate currentDate = LocalDate.now();
-        ListaItensAgendados lista = mapItensAgendados.get(currentDate);
-        if (lista == null) {
-            lista = new ListaItensAgendados(); // Cria uma nova lista vazia
-        }
-        agendaPanel.update(lista);
-
+        ListaItensAgendados listaAtividadesDoDia = mapItensAgendados.get(currentDate);
+        updateAgendaPanel(agendaPanel, listaAtividadesDoDia);
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                handleMouseClick(e, mapItensAgendados, agendaPanel);
+                handleMouseClick(e, agendaPanel);
             }
         });
     }
 
-    private void handleMouseClick(MouseEvent e, MapItensAgendados mapItensAgendados, AgendaPanel agendaPanel) {
-        int row = rowAtPoint(e.getPoint());
-        int col = columnAtPoint(e.getPoint());
+    private void handleMouseClick(MouseEvent evento, AgendaPanel agendaPanel) {
+        int row = rowAtPoint(evento.getPoint());
+        int col = columnAtPoint(evento.getPoint());
         if (row >= 0 && col >= 0) {
             Object day = getValueAt(row, col);
             System.out.println("Selected value: " + day);
 
-            ListaItensAgendados listaNull = new ListaItensAgendados();
             if (day == null) {
-                agendaPanel.update(listaNull);
+                updateAgendaPanel(agendaPanel, null);
+                selectedDate = null;
                 return;
             }
 
-            if (day instanceof String) {
-                try {
-                    day = Integer.parseInt((String) day);
-                } catch (NumberFormatException ex) {
-                    System.out.println("Cannot convert " + day + " to Integer");
-                    return;
-                }
-            }
+            model.setSelectedDay((int) day);
+            selectedDate = model.getLocalDate();
 
-            LocalDate selectedDate = model.getLocalDate((Integer) day);
             ListaItensAgendados lista = mapItensAgendados.get(selectedDate);
-            if (lista == null) {
-                lista = new ListaItensAgendados(); // Cria uma nova lista vazia
-            }
-            agendaPanel.update(lista);
+            updateAgendaPanel(agendaPanel, lista);
         }
+    }
 
+    private void updateAgendaPanel(AgendaPanel agendaPanel, ListaItensAgendados lista) {
+        ListaItensAgendados novaLista = new ListaItensAgendados();
+        if (lista == null) {
+            agendaPanel.update(novaLista);
+            return;
+        }
+        agendaPanel.update(lista);
     }
 
     @Override
@@ -94,19 +89,17 @@ public class CalendarTable extends JTable {
         if (value instanceof Integer) {
             int cellDay = (Integer) value;
 
-            // Obtém o dia atual
             Calendar currentDate = Calendar.getInstance();
             int currentDay = currentDate.get(Calendar.DAY_OF_MONTH);
             int currentMonth = currentDate.get(Calendar.MONTH);
             int currentYear = currentDate.get(Calendar.YEAR);
 
             LocalDate dateToCheck = LocalDate.of(model.getYear(), model.getMonth() + 1, cellDay);
+
             Map<LocalDate, ListaItensAgendados> itensMesSelecionado = mapItensAgendados
                     .getAllItensOfMonth(model.getMonth() + 1);
 
-            // Compara os dias
             if (cellDay == currentDay && model.getYear() == currentYear && model.getMonth() == currentMonth) {
-                // Muda a cor de fundo da célula
                 return SELECTED_COLOR;
             } else if (itensMesSelecionado.containsKey(dateToCheck)) {
                 return SCHEDULED_COLOR;

@@ -1,4 +1,4 @@
-package calendario;
+package org.agendaPessoal.calendario;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -10,10 +10,13 @@ import java.util.Locale;
 public class CalendarModel {
     private static DefaultTableModel model;
     private static Calendar cal = new GregorianCalendar();
+    private int selectedDay;
 
     public CalendarModel() {
         String[] columns = { "Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab" };
         model = new DefaultTableModel(null, columns);
+        Calendar currentDate = Calendar.getInstance();
+        selectedDay = currentDate.get(Calendar.DAY_OF_MONTH);
     }
 
     public DefaultTableModel getModel() {
@@ -59,9 +62,14 @@ public class CalendarModel {
         return cal.get(Calendar.MONTH);
     }
 
-    public LocalDate getLocalDate(int day) {
+    public LocalDate getLocalDate() {
         int year = cal.get(Calendar.YEAR);
         int month = cal.get(Calendar.MONTH) + 1; // Calendar.MONTH é baseado em 0
-        return LocalDate.of(year, month, day);
+        return LocalDate.of(year, month, selectedDay);
+    }
+
+    public void setSelectedDay(int day) {
+        System.out.println("current day: " + day);
+        this.selectedDay = day;
     }
 }

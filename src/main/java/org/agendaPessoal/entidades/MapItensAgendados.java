@@ -1,4 +1,4 @@
-package entidades;
+package org.agendaPessoal.entidades;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -40,6 +40,10 @@ public class MapItensAgendados {
 
     public ListaItensAgendados get(LocalDate date) {
         return itensAgendados.get(date);
+    }
+
+    public int size() {
+        return itensAgendados.size();
     }
 
     public Map<LocalDate, ListaItensAgendados> getAllItensOfMonth(int month) {

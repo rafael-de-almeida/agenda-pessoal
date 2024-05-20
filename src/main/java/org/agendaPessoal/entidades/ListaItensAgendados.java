@@ -1,4 +1,4 @@
-package entidades;
+package org.agendaPessoal.entidades;
 
 import java.util.*;
 
@@ -10,7 +10,6 @@ public class ListaItensAgendados {
 
     public ListaItensAgendados() {
         this.itensAgendados = new ArrayList<>();
-        itensAgendados.
     }
 
     /**

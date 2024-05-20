@@ -1,4 +1,4 @@
-package calendario;
+package org.agendaPessoal.calendario;
 
 import javax.swing.*;
 

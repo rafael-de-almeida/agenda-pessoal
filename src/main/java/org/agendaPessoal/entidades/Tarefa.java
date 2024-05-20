@@ -1,4 +1,4 @@
-package entidades;
+package org.agendaPessoal.entidades;
 
 import java.time.LocalDateTime;
 
