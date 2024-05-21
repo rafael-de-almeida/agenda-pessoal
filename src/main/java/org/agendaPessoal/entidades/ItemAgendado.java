@@ -57,7 +57,7 @@ public class ItemAgendado {
     }
 
     public String displayItem() {
-        return "item agendado" + titulo + descricao;
+        return "item agendado: " + titulo + " " + descricao;
     }
 
     public String getTitulo() {

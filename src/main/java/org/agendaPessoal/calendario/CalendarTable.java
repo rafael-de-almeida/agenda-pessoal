@@ -8,7 +8,9 @@ import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Map;
 
+import javax.swing.BorderFactory;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 
 import org.agendaPessoal.entidades.ListaItensAgendados;
@@ -25,6 +27,8 @@ public class CalendarTable extends JTable {
     private CalendarModel model;
     private MapItensAgendados mapItensAgendados;
 
+    private DefaultTableCellRenderer renderer;
+
     public CalendarTable(CalendarModel model, MapItensAgendados mapItensAgendados, AgendaPanel agendaPanel) {
         super(model.getModel());
         this.model = model;
@@ -33,6 +37,19 @@ public class CalendarTable extends JTable {
         LocalDate currentDate = LocalDate.now();
         ListaItensAgendados listaAtividadesDoDia = mapItensAgendados.get(currentDate);
         updateAgendaPanel(agendaPanel, listaAtividadesDoDia);
+
+        renderer = new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+                    boolean hasFocus,
+                    int row, int column) {
+                super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                setVerticalAlignment(TOP);
+                setHorizontalAlignment(LEFT);
+                setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Adiciona uma margem de 10 pixels
+                return this;
+            }
+        };
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -74,6 +91,11 @@ public class CalendarTable extends JTable {
     @Override
     public boolean isCellEditable(int row, int column) {
         return false;
+    }
+
+    @Override
+    public TableCellRenderer getCellRenderer(int row, int column) {
+        return renderer;
     }
 
     @Override

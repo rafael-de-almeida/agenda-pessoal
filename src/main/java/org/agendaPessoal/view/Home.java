@@ -12,6 +12,8 @@ import org.agendaPessoal.painelEventos.AgendaPanel;
 
 import javax.swing.*;
 import javax.swing.border.*;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
@@ -32,6 +34,7 @@ public class Home {
     private JPanel leftPanel;
     private JPanel rightTopPanel;
     private JPanel rightContainer;
+    private JScrollPane tablePane;
 
     public Home() {
         initialize();
@@ -93,7 +96,19 @@ public class Home {
 
         calendarTable = new CalendarTable(calendarModel, mapItensAgendados, agendaPanel);
         calendarTable.setCellSelectionEnabled(true);
-        JScrollPane tablePane = new JScrollPane(calendarTable);
+
+        tablePane = new JScrollPane(calendarTable);
+        tablePane.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                int height = e.getComponent().getHeight();
+                int headerHeight = calendarTable.getTableHeader().getHeight();
+                int scrollBarWidth = ((Integer) UIManager.get("ScrollBar.width")).intValue();
+                int rows = calendarTable.getRowCount();
+                int rowHeight = Math.round((float) (height - headerHeight - scrollBarWidth) / rows);
+                calendarTable.setRowHeight(rowHeight > 30 ? rowHeight : 30);
+            }
+        });
 
         rightTopPanel.add(calendarPanel.getPanel(), BorderLayout.NORTH);
         rightTopPanel.add(tablePane, BorderLayout.CENTER);
@@ -117,12 +132,16 @@ public class Home {
         Border emptyBorder = new EmptyBorder(5, 5, 5, 5);
         Border border = new CompoundBorder(roundedBorder, emptyBorder);
         titleForm.setBorder(border);
+        titleForm.setText("");
 
         button.addActionListener(ae -> {
-            String titulo = titleForm.getText();
-            titleForm.setText("");
-            mapItensAgendados.addItemAgendado(calendarModel.getLocalDate(), new ItemAgendado(titulo));
-            calendarTable.repaint();
+            String titulo = titleForm.getText().trim();
+            if (!titulo.isEmpty()) {
+                titleForm.setText("");
+                mapItensAgendados.addItemAgendado(calendarModel.getLocalDate(), new ItemAgendado(titulo));
+                calendarTable.repaint();
+            }
+
         });
 
         JLayeredPane layeredPane = new JLayeredPane();

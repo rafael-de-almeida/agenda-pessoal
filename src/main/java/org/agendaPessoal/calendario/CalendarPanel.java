@@ -28,20 +28,21 @@ public class CalendarPanel {
     }
 
     private void createButtons() {
-        JButton b1 = new JButton("<-");
+        JButton b1 = new JButton("<");
         b1.addActionListener(ae -> {
             calendarModel.previousMonth();
             updateMonth();
         });
 
-        JButton b2 = new JButton("->");
+        JButton b2 = new JButton(">");
         b2.addActionListener(ae -> {
             calendarModel.nextMonth();
             updateMonth();
         });
-
-        panel.add(b1, BorderLayout.WEST);
-        panel.add(b2, BorderLayout.EAST);
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        buttonPanel.add(b1);
+        buttonPanel.add(b2);
+        panel.add(buttonPanel, BorderLayout.EAST);
     }
 
     private void createMonthLabel() {
@@ -49,6 +50,6 @@ public class CalendarPanel {
         monthLabel.setHorizontalAlignment(SwingConstants.CENTER);
         monthLabel.setText(calendarModel.getMonthName());
 
-        panel.add(monthLabel, BorderLayout.CENTER);
+        panel.add(monthLabel, BorderLayout.WEST);
     }
 }
