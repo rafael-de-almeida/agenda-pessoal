@@ -12,6 +12,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumnModel;
 
 import org.agendaPessoal.entidades.ListaItensAgendados;
 import org.agendaPessoal.entidades.MapItensAgendados;
@@ -33,6 +34,12 @@ public class CalendarTable extends JTable {
         super(model.getModel());
         this.model = model;
         this.mapItensAgendados = mapItensAgendados;
+
+        getTableHeader().setReorderingAllowed(false);
+        TableColumnModel columnModel = getColumnModel();
+        for (int i = 0; i < columnModel.getColumnCount(); i++) {
+            columnModel.getColumn(i).setResizable(false);
+        }
 
         LocalDate currentDate = LocalDate.now();
         ListaItensAgendados listaAtividadesDoDia = mapItensAgendados.get(currentDate);

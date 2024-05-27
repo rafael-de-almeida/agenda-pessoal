@@ -49,6 +49,7 @@ public class NewItem extends JFrame {
         JTextArea descriptionInput = new JTextArea();
         descriptionInput.setColumns(30);
         descriptionInput.setRows(4);
+        descriptionPanel.add(descriptionLabel);
         descriptionPanel.add(descriptionInput);
 
         JButton button = new JButton("Adicionar Evento");
@@ -56,7 +57,6 @@ public class NewItem extends JFrame {
         add(titleForm);
         add(dataInicioForm);
         add(dataFimForm);
-        add(descriptionLabel);
         add(descriptionPanel);
         add(button);
 

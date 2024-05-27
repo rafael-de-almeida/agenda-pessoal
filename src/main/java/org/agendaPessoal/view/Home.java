@@ -12,8 +12,6 @@ import org.agendaPessoal.painelEventos.AgendaPanel;
 
 import javax.swing.*;
 import javax.swing.border.*;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
@@ -45,8 +43,8 @@ public class Home {
         createAgendaPanel();
         createFrame();
         createPanels();
-        createLateralMenu();
         createCalendar();
+        createLateralMenu();
         finalizeInitialization();
     }
 
@@ -104,7 +102,7 @@ public class Home {
                 int height = e.getComponent().getHeight();
                 int headerHeight = calendarTable.getTableHeader().getHeight();
                 int scrollBarWidth = ((Integer) UIManager.get("ScrollBar.width")).intValue();
-                int rows = calendarTable.getRowCount();
+                int rows = 6;
                 int rowHeight = Math.round((float) (height - headerHeight - scrollBarWidth) / rows);
                 calendarTable.setRowHeight(rowHeight > 30 ? rowHeight : 30);
             }
@@ -138,8 +136,12 @@ public class Home {
             String titulo = titleForm.getText().trim();
             if (!titulo.isEmpty()) {
                 titleForm.setText("");
+
                 mapItensAgendados.addItemAgendado(calendarModel.getLocalDate(), new ItemAgendado(titulo));
                 calendarTable.repaint();
+            } else {
+                NewItem newItem = new NewItem();
+                newItem.setVisible(true);
             }
 
         });

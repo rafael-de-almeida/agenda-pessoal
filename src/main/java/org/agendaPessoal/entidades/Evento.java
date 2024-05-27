@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Evento extends ItemAgendado {
-    List<Convidado> convidados;
+    List<String> convidados;
 
     public Evento(String titulo, LocalDateTime dataInicio, LocalDateTime dataFim) {
         super(titulo, dataInicio, dataFim);
@@ -14,7 +14,7 @@ public class Evento extends ItemAgendado {
     }
 
     public Evento(String titulo, LocalDateTime dataInicio, LocalDateTime dataFim, boolean semanal, boolean anual,
-            boolean diario, boolean mensal, String descricao, List<Convidado> convidados) {
+            boolean diario, boolean mensal, String descricao, List<String> convidados) {
         super(titulo, dataInicio, dataFim, semanal, anual, diario, mensal, descricao);
         this.convidados = new ArrayList<>();
         ;
