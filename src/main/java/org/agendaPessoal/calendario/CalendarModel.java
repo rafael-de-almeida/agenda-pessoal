@@ -2,6 +2,8 @@ package org.agendaPessoal.calendario;
 
 import javax.swing.table.DefaultTableModel;
 
+import org.agendaPessoal.entidades.ListaItensAgendados;
+
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -71,5 +73,23 @@ public class CalendarModel {
     public void setSelectedDay(int day) {
         System.out.println("current day: " + day);
         this.selectedDay = day;
+    }
+}
+
+class DayAndListData {
+    private int day;
+    private ListaItensAgendados listData;
+
+    public DayAndListData(int day, ListaItensAgendados listData) {
+        this.day = day;
+        this.listData = listData;
+    }
+
+    public int getDay() {
+        return day;
+    }
+
+    public ListaItensAgendados getListData() {
+        return listData;
     }
 }

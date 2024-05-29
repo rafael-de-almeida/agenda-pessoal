@@ -16,7 +16,7 @@ import javax.swing.table.TableColumnModel;
 
 import org.agendaPessoal.entidades.ListaItensAgendados;
 import org.agendaPessoal.entidades.MapItensAgendados;
-import org.agendaPessoal.painelEventos.AgendaPanel;
+import org.agendaPessoal.view.AgendaPanel;
 
 public class CalendarTable extends JTable {
     private static final Color SELECTED_COLOR = Color.GREEN;
@@ -53,7 +53,11 @@ public class CalendarTable extends JTable {
                 super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
                 setVerticalAlignment(TOP);
                 setHorizontalAlignment(LEFT);
-                setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Adiciona uma margem de 10 pixels
+                setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+                if (isSelected) {
+                    setBorder(BorderFactory.createLineBorder(Color.BLUE));
+                }
                 return this;
             }
         };

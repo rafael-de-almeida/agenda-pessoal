@@ -9,12 +9,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 public class MapItensAgendados {
-    private Map<LocalDate, ListaItensAgendados> itensAgendados;
+    private TreeMap<LocalDate, ListaItensAgendados> itensAgendados;
 
     public MapItensAgendados() {
-        this.itensAgendados = new HashMap<>();
+        this.itensAgendados = new TreeMap<>();
     }
 
     public void addListaItemAgendado(LocalDate date, ListaItensAgendados lista) {
@@ -54,6 +55,10 @@ public class MapItensAgendados {
             }
         }
         return itensDoMes;
+    }
+
+    public Map<LocalDate, ListaItensAgendados> getItensAgendadosOrdered() {
+        return new TreeMap<>(itensAgendados);
     }
 
     public void getDataFromFile(String fileName) {

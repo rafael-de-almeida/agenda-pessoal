@@ -1,4 +1,4 @@
-package org.agendaPessoal.painelEventos;
+package org.agendaPessoal.view;
 
 import javax.swing.BoxLayout;
 import javax.swing.JList;

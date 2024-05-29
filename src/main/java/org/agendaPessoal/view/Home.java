@@ -8,7 +8,6 @@ import org.agendaPessoal.entidades.ItemAgendado;
 import org.agendaPessoal.entidades.ListaItensAgendados;
 import org.agendaPessoal.entidades.MapItensAgendados;
 import org.agendaPessoal.entidades.Tarefa;
-import org.agendaPessoal.painelEventos.AgendaPanel;
 
 import javax.swing.*;
 import javax.swing.border.*;
