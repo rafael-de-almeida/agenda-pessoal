@@ -28,10 +28,10 @@ public class ItemAgendado {
         descricao = "";
     }
 
-    public ItemAgendado(String titulo, LocalDateTime dataInicio, LocalDateTime dataFim) {
+    public ItemAgendado(String titulo, LocalDateTime dataFim) {
         this.titulo = titulo;
-        this.dataInicio = dataInicio;
         this.dataFim = dataFim;
+        this.dataInicio = dataFim;
         diario = false;
         semanal = false;
         mensal = false;
@@ -57,7 +57,7 @@ public class ItemAgendado {
     }
 
     public String displayItem() {
-        return "item agendado: " + titulo + " " + descricao;
+        return dataFim + " " + "item agendado: " + titulo + " " + descricao;
     }
 
     public String getTitulo() {

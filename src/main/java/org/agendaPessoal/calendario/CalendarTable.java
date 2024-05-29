@@ -125,6 +125,15 @@ public class CalendarTable extends JTable {
         return c;
     }
 
+    @Override
+    public void changeSelection(int rowIndex, int columnIndex, boolean toggle, boolean extend) {
+        Object value = getValueAt(rowIndex, columnIndex);
+        if (value == null || value.toString().isEmpty()) {
+            return;
+        }
+        super.changeSelection(rowIndex, columnIndex, toggle, extend);
+    }
+
     private Color getCellBackgroundColor(int row, int column) {
         Object value = getValueAt(row, column);
         if (value instanceof Integer) {

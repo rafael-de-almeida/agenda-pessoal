@@ -9,7 +9,7 @@ public class Evento extends ItemAgendado {
     List<String> convidados;
 
     public Evento(String titulo, LocalDateTime dataInicio, LocalDateTime dataFim) {
-        super(titulo, dataInicio, dataFim);
+        super(titulo, dataFim);
         this.convidados = new ArrayList<>();
     }
 

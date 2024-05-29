@@ -7,7 +7,7 @@ public class Tarefa extends ItemAgendado {
     private int prioridade;
 
     public Tarefa(String titulo, LocalDateTime dataInicio, LocalDateTime dataFim, boolean concluida, int prioridade) {
-        super(titulo, dataInicio, dataFim);
+        super(titulo, dataFim);
         this.concluida = concluida;
         this.prioridade = prioridade;
     }

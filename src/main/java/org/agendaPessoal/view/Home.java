@@ -29,7 +29,6 @@ public class Home {
     private CalendarModel calendarModel;
     private CalendarPanel calendarPanel;
     private JFrame frame;
-    private JPanel leftPanel;
     private JPanel rightTopPanel;
     private JPanel rightContainer;
     private JScrollPane tablePane;
@@ -79,18 +78,19 @@ public class Home {
     }
 
     private void createPanels() {
-        leftPanel = new JPanel();
-        leftPanel.setBackground(Color.BLUE);
 
         rightTopPanel = new JPanel(new BorderLayout());
         rightContainer = new JPanel();
-        frame.add(leftPanel, BorderLayout.WEST);
         frame.add(rightContainer, BorderLayout.CENTER);
     }
 
     private void createLateralMenu() {
-        JLabel Logo = new JLabel("myAgenda");
-        leftPanel.add(Logo);
+        JMenuBar menuBar = new JMenuBar();
+        JMenu AnotacoesMenu = new JMenu("Anotações");
+        JMenuItem openItem = new JMenuItem("Open");
+        AnotacoesMenu.add(openItem);
+        menuBar.add(AnotacoesMenu);
+        frame.setJMenuBar(menuBar);
     }
 
     private void createCalendar() {
@@ -141,7 +141,8 @@ public class Home {
             if (!titulo.isEmpty()) {
                 titleForm.setText("");
 
-                mapItensAgendados.addItemAgendado(calendarModel.getLocalDate(), new ItemAgendado(titulo));
+                mapItensAgendados.addItemAgendado(calendarModel.getLocalDate(),
+                        new ItemAgendado(titulo, calendarModel.getLocalDate().atStartOfDay()));
                 ListaItensAgendados lista = mapItensAgendados.get(calendarModel.getLocalDate());
                 calendarTable.repaint();
                 agendaPanel.update(lista);
