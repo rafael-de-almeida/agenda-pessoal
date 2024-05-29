@@ -6,6 +6,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.BorderFactory;
@@ -17,6 +18,7 @@ import javax.swing.table.TableColumnModel;
 import org.agendaPessoal.entidades.ListaItensAgendados;
 import org.agendaPessoal.entidades.MapItensAgendados;
 import org.agendaPessoal.view.AgendaPanel;
+import org.agendaPessoal.view.ItensAgendadosPanel;
 
 public class CalendarTable extends JTable {
     private static final Color SELECTED_COLOR = Color.GREEN;
@@ -29,11 +31,14 @@ public class CalendarTable extends JTable {
     private MapItensAgendados mapItensAgendados;
 
     private DefaultTableCellRenderer renderer;
+    private ItensAgendadosPanel itensAgendadosPanel;
 
-    public CalendarTable(CalendarModel model, MapItensAgendados mapItensAgendados, AgendaPanel agendaPanel) {
+    public CalendarTable(CalendarModel model, MapItensAgendados mapItensAgendados, AgendaPanel agendaPanel,
+            ItensAgendadosPanel itensAgendadosPanel) {
         super(model.getModel());
         this.model = model;
         this.mapItensAgendados = mapItensAgendados;
+        this.itensAgendadosPanel = itensAgendadosPanel;
 
         getTableHeader().setReorderingAllowed(false);
         TableColumnModel columnModel = getColumnModel();
@@ -43,7 +48,7 @@ public class CalendarTable extends JTable {
 
         LocalDate currentDate = LocalDate.now();
         ListaItensAgendados listaAtividadesDoDia = mapItensAgendados.get(currentDate);
-        updateAgendaPanel(agendaPanel, listaAtividadesDoDia);
+        updatePanels(agendaPanel, listaAtividadesDoDia);
 
         renderer = new DefaultTableCellRenderer() {
             @Override
@@ -77,7 +82,7 @@ public class CalendarTable extends JTable {
             System.out.println("Selected value: " + day);
 
             if (day == null) {
-                updateAgendaPanel(agendaPanel, null);
+                updatePanels(agendaPanel, null);
                 selectedDate = null;
                 return;
             }
@@ -86,12 +91,15 @@ public class CalendarTable extends JTable {
             selectedDate = model.getLocalDate();
 
             ListaItensAgendados lista = mapItensAgendados.get(selectedDate);
-            updateAgendaPanel(agendaPanel, lista);
+            updatePanels(agendaPanel, lista);
         }
     }
 
-    private void updateAgendaPanel(AgendaPanel agendaPanel, ListaItensAgendados lista) {
+    private void updatePanels(AgendaPanel agendaPanel, ListaItensAgendados lista) {
         ListaItensAgendados novaLista = new ListaItensAgendados();
+        List<ListaItensAgendados> allItens = mapItensAgendados.getItensAgendadosOrdered();
+        itensAgendadosPanel.update(allItens);
+
         if (lista == null) {
             agendaPanel.update(novaLista);
             return;

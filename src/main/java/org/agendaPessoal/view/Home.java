@@ -23,6 +23,7 @@ public class Home {
 
     private MapItensAgendados mapItensAgendados;
     private AgendaPanel agendaPanel;
+    private ItensAgendadosPanel itensAgendadosPanel;
 
     private JTable calendarTable;
     private CalendarModel calendarModel;
@@ -40,6 +41,7 @@ public class Home {
     private void initialize() {
         createMapItensAgendados();
         createAgendaPanel();
+        createItensPanel();
         createFrame();
         createPanels();
         createCalendar();
@@ -64,6 +66,10 @@ public class Home {
         lista.adicionarItemAgendado(tarefa);
 
         agendaPanel = new AgendaPanel();
+    }
+
+    private void createItensPanel() {
+        this.itensAgendadosPanel = new ItensAgendadosPanel();
     }
 
     private void createFrame() {
@@ -91,7 +97,7 @@ public class Home {
         calendarModel = new CalendarModel();
         calendarPanel = new CalendarPanel(calendarModel);
 
-        calendarTable = new CalendarTable(calendarModel, mapItensAgendados, agendaPanel);
+        calendarTable = new CalendarTable(calendarModel, mapItensAgendados, agendaPanel, itensAgendadosPanel);
         calendarTable.setCellSelectionEnabled(true);
 
         tablePane = new JScrollPane(calendarTable);
@@ -119,9 +125,8 @@ public class Home {
     private void finalizeInitialization() {
 
         JTabbedPane tabbedPane = new JTabbedPane();
-        JPanel panel = new JPanel();
         tabbedPane.addTab("tarefas do dia", agendaPanel);
-        tabbedPane.addTab("próximas tarefas", panel);
+        tabbedPane.addTab("próximas tarefas", itensAgendadosPanel);
 
         JTextField titleForm = new JTextField(10);
         JButton button = new JButton("+");
@@ -137,7 +142,10 @@ public class Home {
                 titleForm.setText("");
 
                 mapItensAgendados.addItemAgendado(calendarModel.getLocalDate(), new ItemAgendado(titulo));
+                ListaItensAgendados lista = mapItensAgendados.get(calendarModel.getLocalDate());
                 calendarTable.repaint();
+                agendaPanel.update(lista);
+                itensAgendadosPanel.update(mapItensAgendados.getItensAgendadosOrdered());
             } else {
                 NewItem newItem = new NewItem();
                 newItem.setVisible(true);

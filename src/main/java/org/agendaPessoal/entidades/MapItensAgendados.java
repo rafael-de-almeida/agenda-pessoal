@@ -6,7 +6,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
@@ -57,8 +59,9 @@ public class MapItensAgendados {
         return itensDoMes;
     }
 
-    public Map<LocalDate, ListaItensAgendados> getItensAgendadosOrdered() {
-        return new TreeMap<>(itensAgendados);
+    public List<ListaItensAgendados> getItensAgendadosOrdered() {
+        List<ListaItensAgendados> list = new ArrayList<>(itensAgendados.values());
+        return list;
     }
 
     public void getDataFromFile(String fileName) {
