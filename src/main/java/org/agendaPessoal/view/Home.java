@@ -13,6 +13,8 @@ import javax.swing.*;
 import javax.swing.border.*;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.time.LocalDate;
@@ -88,10 +90,20 @@ public class Home {
         JMenuBar menuBar = new JMenuBar();
         JMenu AnotacoesMenu = new JMenu("Anotações");
         JMenuItem openItem = new JMenuItem("Abrir");
+
+        openItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JFrame newPage = new JFrame("Anotações");
+                newPage.setSize(300, 200);
+                newPage.setVisible(true);
+            }
+        });
+
         AnotacoesMenu.add(openItem);
         menuBar.add(AnotacoesMenu);
         frame.setJMenuBar(menuBar);
     }
+
 
     private void createCalendar() {
         calendarModel = new CalendarModel();
