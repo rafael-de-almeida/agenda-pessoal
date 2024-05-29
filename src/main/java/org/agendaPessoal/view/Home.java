@@ -44,7 +44,7 @@ public class Home {
         createFrame();
         createPanels();
         createCalendar();
-        createLateralMenu();
+        createTopMenu();
         finalizeInitialization();
     }
 
@@ -84,10 +84,10 @@ public class Home {
         frame.add(rightContainer, BorderLayout.CENTER);
     }
 
-    private void createLateralMenu() {
+    private void createTopMenu() {
         JMenuBar menuBar = new JMenuBar();
         JMenu AnotacoesMenu = new JMenu("Anotações");
-        JMenuItem openItem = new JMenuItem("Open");
+        JMenuItem openItem = new JMenuItem("Abrir");
         AnotacoesMenu.add(openItem);
         menuBar.add(AnotacoesMenu);
         frame.setJMenuBar(menuBar);
