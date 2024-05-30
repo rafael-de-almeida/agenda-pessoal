@@ -17,6 +17,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -90,11 +91,58 @@ public class Home {
         JMenuBar menuBar = new JMenuBar();
         JMenu AnotacoesMenu = new JMenu("Anotações");
         JMenuItem openItem = new JMenuItem("Abrir");
+        JMenuItem saveItem = new JMenuItem("Salvar");
 
         openItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JFrame newPage = new JFrame("Anotações");
                 newPage.setSize(300, 200);
+
+                JTextArea area = new JTextArea();
+
+                JButton saveButton = new JButton("Salvar");
+                saveButton.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        JFileChooser fileChooser = new JFileChooser();
+                        int option = fileChooser.showSaveDialog(newPage);
+                        if (option == JFileChooser.APPROVE_OPTION) {
+                            File file = fileChooser.getSelectedFile();
+                            try {
+                                FileWriter writer = new FileWriter(file);
+                                writer.write(area.getText());
+                                writer.close();
+                            } catch (IOException ex) {
+                                System.out.println("Erro: " + ex);
+                            }
+                        }
+                    }
+                });
+
+                JButton openButton = new JButton("Abrir");
+                openButton.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        JFileChooser fileChooser = new JFileChooser();
+                        int option = fileChooser.showOpenDialog(newPage);
+                        if (option == JFileChooser.APPROVE_OPTION) {
+                            File file = fileChooser.getSelectedFile();
+                            try {
+                                BufferedReader reader = new BufferedReader(new FileReader(file));
+                                area.read(reader, null);
+                                reader.close();
+                            } catch (IOException ex) {
+                                System.out.println("Erro: " + ex);
+                            }
+                        }
+                    }
+                });
+
+                JPanel buttonPanel = new JPanel();
+                buttonPanel.add(saveButton);
+                buttonPanel.add(openButton);
+
+                newPage.setLayout(new BorderLayout());
+                newPage.add(buttonPanel, BorderLayout.NORTH);
+                newPage.add(new JScrollPane(area), BorderLayout.CENTER);
                 newPage.setVisible(true);
             }
         });
@@ -103,6 +151,7 @@ public class Home {
         menuBar.add(AnotacoesMenu);
         frame.setJMenuBar(menuBar);
     }
+
 
 
     private void createCalendar() {
