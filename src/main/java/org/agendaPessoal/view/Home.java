@@ -1,8 +1,6 @@
 package org.agendaPessoal.view;
 
-import org.agendaPessoal.calendario.CalendarModel;
-import org.agendaPessoal.calendario.CalendarPanel;
-import org.agendaPessoal.calendario.CalendarTable;
+import org.agendaPessoal.calendario.CalendarioUI;
 import org.agendaPessoal.entidades.Evento;
 import org.agendaPessoal.entidades.ItemAgendado;
 import org.agendaPessoal.entidades.ListaItensAgendados;
@@ -28,13 +26,8 @@ public class Home {
     private AgendaPanel agendaPanel;
     private ItensAgendadosPanel itensAgendadosPanel;
 
-    private JTable calendarTable;
-    private CalendarModel calendarModel;
-    private CalendarPanel calendarPanel;
     private JFrame frame;
-    private JPanel rightTopPanel;
-    private JPanel rightContainer;
-    private JScrollPane tablePane;
+    private CalendarioUI calendarioUI;
 
     public Home() {
         initialize();
@@ -45,8 +38,7 @@ public class Home {
         createAgendaPanel();
         createItensPanel();
         createFrame();
-        createPanels();
-        createCalendar();
+        criarUICalendario();
         createTopMenu();
         finalizeInitialization();
     }
@@ -80,11 +72,9 @@ public class Home {
         frame.setLayout(new BorderLayout());
     }
 
-    private void createPanels() {
-
-        rightTopPanel = new JPanel(new BorderLayout());
-        rightContainer = new JPanel();
-        frame.add(rightContainer, BorderLayout.CENTER);
+    private void criarUICalendario() {
+        calendarioUI = new CalendarioUI(mapItensAgendados, agendaPanel, itensAgendadosPanel);
+        frame.add(calendarioUI, BorderLayout.CENTER);
     }
 
     private void createTopMenu() {
@@ -152,37 +142,6 @@ public class Home {
         frame.setJMenuBar(menuBar);
     }
 
-
-
-    private void createCalendar() {
-        calendarModel = new CalendarModel();
-        calendarPanel = new CalendarPanel(calendarModel);
-
-        calendarTable = new CalendarTable(calendarModel, mapItensAgendados, agendaPanel, itensAgendadosPanel);
-        calendarTable.setCellSelectionEnabled(true);
-
-        tablePane = new JScrollPane(calendarTable);
-        tablePane.addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-                int height = e.getComponent().getHeight();
-                int headerHeight = calendarTable.getTableHeader().getHeight();
-                int scrollBarWidth = ((Integer) UIManager.get("ScrollBar.width")).intValue();
-                int rows = 6;
-                int rowHeight = Math.round((float) (height - headerHeight - scrollBarWidth) / rows);
-                calendarTable.setRowHeight(rowHeight > 30 ? rowHeight : 30);
-            }
-        });
-
-        rightTopPanel.add(calendarPanel.getPanel(), BorderLayout.NORTH);
-        rightTopPanel.add(tablePane, BorderLayout.CENTER);
-
-        rightContainer.setLayout(new GridLayout(2, 1));
-        rightContainer.add(rightTopPanel);
-
-        calendarModel.updateMonth();
-    }
-
     private void finalizeInitialization() {
 
         JTabbedPane tabbedPane = new JTabbedPane();
@@ -202,10 +161,10 @@ public class Home {
             if (!titulo.isEmpty()) {
                 titleForm.setText("");
 
-                mapItensAgendados.addItemAgendado(calendarModel.getLocalDate(),
-                        new ItemAgendado(titulo, calendarModel.getLocalDate().atStartOfDay()));
-                ListaItensAgendados lista = mapItensAgendados.get(calendarModel.getLocalDate());
-                calendarTable.repaint();
+                mapItensAgendados.addItemAgendado(calendarioUI.getCalendarModel().getLocalDate(),
+                        new ItemAgendado(titulo, calendarioUI.getCalendarModel().getLocalDate().atStartOfDay()));
+                ListaItensAgendados lista = mapItensAgendados.get(calendarioUI.getCalendarModel().getLocalDate());
+                calendarioUI.getCalendarTable().repaint();
                 agendaPanel.update(lista);
                 itensAgendadosPanel.update(mapItensAgendados.getItensAgendadosOrdered());
             } else {
@@ -234,7 +193,7 @@ public class Home {
             }
         });
 
-        rightContainer.add(layeredPane);
+        calendarioUI.add(layeredPane);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
