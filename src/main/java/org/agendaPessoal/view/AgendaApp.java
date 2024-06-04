@@ -44,7 +44,7 @@ public class AgendaApp extends JFrame {
 
         createAgendaPanel();
         criarConteudoPrincipal();
-        createTopMenu();
+        criarMenu();
         finalizeInitialization();
     }
 
@@ -64,7 +64,7 @@ public class AgendaApp extends JFrame {
 
     }
 
-    private void createTopMenu() {
+    private void criarMenu() {
         JMenuBar menuBar = new JMenuBar();
         JMenu AnotacoesMenu = new JMenu("Anotações");
         JMenuItem openItem = new JMenuItem("Abrir");
