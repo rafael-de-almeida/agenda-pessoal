@@ -1,4 +1,4 @@
-package org.agendaPessoal.view;
+package org.agendaPessoal.agenda;
 
 import javax.swing.BoxLayout;
 import javax.swing.JList;
@@ -7,9 +7,9 @@ import javax.swing.JScrollPane;
 
 import org.agendaPessoal.entidades.ListaItensAgendados;
 
-public class AgendaPanel extends JPanel {
+public class ListaItensDoDia extends JPanel {
 
-    public AgendaPanel() {
+    public ListaItensDoDia() {
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
     }
 

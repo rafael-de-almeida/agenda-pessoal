@@ -1,4 +1,4 @@
-package org.agendaPessoal.view;
+package org.agendaPessoal.agenda;
 
 import java.awt.FlowLayout;
 import java.text.ParseException;

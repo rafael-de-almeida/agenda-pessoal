@@ -2,8 +2,6 @@ package org.agendaPessoal;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.agendaPessoal.entidades.Evento;
 import org.agendaPessoal.entidades.ListaItensAgendados;

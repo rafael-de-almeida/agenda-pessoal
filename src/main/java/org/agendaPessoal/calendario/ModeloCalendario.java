@@ -9,12 +9,12 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
-public class CalendarModel {
+public class ModeloCalendario {
     private static DefaultTableModel model;
     private static Calendar cal = new GregorianCalendar();
     private int selectedDay;
 
-    public CalendarModel() {
+    public ModeloCalendario() {
         String[] columns = { "Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab" };
         model = new DefaultTableModel(null, columns);
         Calendar currentDate = Calendar.getInstance();

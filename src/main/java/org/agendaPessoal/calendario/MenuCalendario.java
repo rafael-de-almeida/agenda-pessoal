@@ -4,12 +4,12 @@ import javax.swing.*;
 
 import java.awt.*;
 
-public class CalendarPanel {
+public class MenuCalendario {
     private JPanel panel;
     private JLabel monthLabel;
-    private CalendarModel calendarModel;
+    private ModeloCalendario calendarModel;
 
-    public CalendarPanel(CalendarModel model) {
+    public MenuCalendario(ModeloCalendario model) {
         this.calendarModel = model;
 
         panel = new JPanel();

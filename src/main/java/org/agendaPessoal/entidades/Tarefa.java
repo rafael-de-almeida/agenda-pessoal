@@ -40,7 +40,7 @@ public class Tarefa extends ItemAgendado {
 
     @Override
     public String displayItem() {
-        return titulo + ", descricao:" + descricao + "\n, prioridade:" + prioridade;
+        return titulo + "," + descricao;
     }
 
 }

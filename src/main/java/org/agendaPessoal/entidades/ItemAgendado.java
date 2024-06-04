@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 
 /**
  * ScheduledItem
- * Author: Fábio-k
  */
 public class ItemAgendado {
     protected String titulo;

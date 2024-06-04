@@ -1,8 +1,9 @@
 package org.agendaPessoal;
-import org.agendaPessoal.view.Home;
+
+import org.agendaPessoal.view.AgendaApp;
 
 public class Main {
     public static void main(String[] args) {
-        new Home();
+        new AgendaApp();
     }
 }
