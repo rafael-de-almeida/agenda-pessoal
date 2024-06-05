@@ -7,6 +7,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * Classe responsável por manter uma lista de itens agendados de acordo com o
+ * dia (LocalDate)
+ */
 public class MapItensAgendados {
     private TreeMap<LocalDate, ListaItensAgendados> itensAgendados;
 

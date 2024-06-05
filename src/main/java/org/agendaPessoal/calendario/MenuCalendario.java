@@ -4,6 +4,9 @@ import javax.swing.*;
 
 import java.awt.*;
 
+/**
+ * Gera e configura o menu do calendario
+ */
 public class MenuCalendario {
     private JPanel panel;
     private JLabel monthLabel;

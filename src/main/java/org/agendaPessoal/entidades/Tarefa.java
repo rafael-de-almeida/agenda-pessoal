@@ -2,6 +2,9 @@ package org.agendaPessoal.entidades;
 
 import java.time.LocalDateTime;
 
+/**
+ * Armazena tarefas geradas pelo calendario
+ */
 public class Tarefa extends ItemAgendado {
     private boolean concluida;
     private int prioridade;

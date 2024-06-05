@@ -33,6 +33,9 @@ public class TabelaCalendario extends JTable {
     private DefaultTableCellRenderer renderer;
     private ListaItens itensAgendadosPanel;
 
+    /**
+     * Gera e configura a tabela utilizada pelo calendario
+     */
     public TabelaCalendario(ModeloCalendario model, MapItensAgendados mapItensAgendados, ListaItensDoDia agendaPanel,
             ListaItens itensAgendadosPanel) {
         super(model.getModel());

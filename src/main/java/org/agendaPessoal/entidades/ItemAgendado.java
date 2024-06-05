@@ -3,7 +3,8 @@ package org.agendaPessoal.entidades;
 import java.time.LocalDateTime;
 
 /**
- * ScheduledItem
+ * Classe responsável por ter todos os métodos e atributos usados pela
+ * subclasse tarefa
  */
 public class ItemAgendado {
     protected String titulo;

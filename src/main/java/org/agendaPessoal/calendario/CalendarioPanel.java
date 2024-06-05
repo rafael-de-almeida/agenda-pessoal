@@ -13,6 +13,9 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.BorderLayout;
 
+/**
+ * Gerencia todo o calendario
+ */
 public class CalendarioPanel extends JPanel {
     private JTable tabelaCalendario;
     private ModeloCalendario modeloCalendario;

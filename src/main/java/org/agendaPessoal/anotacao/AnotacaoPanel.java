@@ -18,7 +18,13 @@ import javax.swing.JTextArea;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-public class AnotacaoPanel {
+import org.agendaPessoal.entidades.FileManager;
+
+/**
+ * frame que gerencia todas as anotações
+ */
+
+public class AnotacaoPanel extends JFrame {
     private JPanel fileListPanel;
 
     private String selectedValue;
@@ -28,8 +34,9 @@ public class AnotacaoPanel {
     private FileManager fileManager = new FileManager();
 
     public AnotacaoPanel() {
-        JFrame newPage = new JFrame("Anotações");
-        newPage.setSize(300, 200);
+        this.setTitle("Anotações");
+        this.setSize(300, 200);
+
         JMenuBar menuBar = new JMenuBar();
         JMenu AnotacoesMenu = new JMenu("arquivos");
         JMenuItem saveItem = new JMenuItem("salvar");
@@ -39,9 +46,12 @@ public class AnotacaoPanel {
         novoItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String filename = fileManager.gerarNovoArquivo();
-                System.out.println("Generated filename: " + filename);
-                fileManager.salvarArquivo(filename, area.getText());
-                atualizarLista(filename);
+                if (filename != null) {
+                    System.out.println("Generated filename: " + filename);
+                    fileManager.salvarArquivo(filename, area.getText());
+                    atualizarLista(filename);
+                }
+
             }
         });
         saveItem.addActionListener(new ActionListener() {
@@ -50,8 +60,10 @@ public class AnotacaoPanel {
             public void actionPerformed(ActionEvent e) {
                 if (selectedValue == null) {
                     filename = fileManager.gerarNovoArquivo();
-                    fileManager.salvarArquivo(filename, "");
-                    atualizarLista(filename);
+                    if (filename != null) {
+                        fileManager.salvarArquivo(filename, "");
+                        atualizarLista(filename);
+                    }
                 }
 
                 else
@@ -64,11 +76,11 @@ public class AnotacaoPanel {
         AnotacoesMenu.add(novoItem);
         menuBar.add(AnotacoesMenu);
 
-        newPage.setLayout(new BorderLayout());
-        newPage.setJMenuBar(menuBar);
-        newPage.add(new JScrollPane(area), BorderLayout.CENTER);
-        newPage.add(fileListPanel, BorderLayout.WEST);
-        newPage.setVisible(true);
+        this.setLayout(new BorderLayout());
+        this.setJMenuBar(menuBar);
+        this.add(new JScrollPane(area), BorderLayout.CENTER);
+        this.add(fileListPanel, BorderLayout.WEST);
+        this.setVisible(true);
     }
 
     public void createListAnotacoes() {

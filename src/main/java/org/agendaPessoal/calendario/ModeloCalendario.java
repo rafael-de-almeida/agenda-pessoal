@@ -2,13 +2,15 @@ package org.agendaPessoal.calendario;
 
 import javax.swing.table.DefaultTableModel;
 
-import org.agendaPessoal.entidades.ListaItensAgendados;
-
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
+/**
+ * Possui métodos para o funcionamento do calendario (gerencia os messes gera os
+ * itens da tabela, fornece dia atual)
+ */
 public class ModeloCalendario {
     private static DefaultTableModel model;
     private static Calendar cal = new GregorianCalendar();
@@ -73,23 +75,5 @@ public class ModeloCalendario {
     public void setSelectedDay(int day) {
         System.out.println("current day: " + day);
         this.selectedDay = day;
-    }
-}
-
-class DayAndListData {
-    private int day;
-    private ListaItensAgendados listData;
-
-    public DayAndListData(int day, ListaItensAgendados listData) {
-        this.day = day;
-        this.listData = listData;
-    }
-
-    public int getDay() {
-        return day;
-    }
-
-    public ListaItensAgendados getListData() {
-        return listData;
     }
 }

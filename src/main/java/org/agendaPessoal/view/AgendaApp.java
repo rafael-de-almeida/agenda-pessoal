@@ -25,7 +25,13 @@ public class AgendaApp extends JFrame {
 
     private CalendarioPanel calendarioUI;
     private JPanel rightContainer;
+    private JMenuBar menuBar;
 
+    PainelAgenda painelAgenda;
+
+    /**
+     * Inicializa a aplicação
+     */
     public AgendaApp() {
         this.setTitle(APP_TITLE);
         this.setSize(500, 500);
@@ -42,30 +48,27 @@ public class AgendaApp extends JFrame {
         LocalDate date = LocalDate.of(2024, 6, 12);
         mapItensAgendados.addItemAgendado(date, tarefa);
 
-        createAgendaPanel();
         criarConteudoPrincipal();
         criarMenu();
-        finalizeInitialization();
-    }
-
-    private void createAgendaPanel() {
-        agendaPanel = new ListaItensDoDia();
-        itensAgendadosPanel = new ListaItens();
+        AdicionarAoFrame();
     }
 
     private void criarConteudoPrincipal() {
+        agendaPanel = new ListaItensDoDia();
+        itensAgendadosPanel = new ListaItens();
+
         rightContainer = new JPanel();
         rightContainer.setLayout(new GridLayout(2, 1));
         calendarioUI = new CalendarioPanel(mapItensAgendados, agendaPanel, itensAgendadosPanel);
-        PainelAgenda painelAgenda = new PainelAgenda(mapItensAgendados, calendarioUI, agendaPanel, itensAgendadosPanel);
+
+        painelAgenda = new PainelAgenda(mapItensAgendados, calendarioUI, agendaPanel, itensAgendadosPanel);
 
         rightContainer.add(calendarioUI);
         rightContainer.add(painelAgenda);
-
     }
 
     private void criarMenu() {
-        JMenuBar menuBar = new JMenuBar();
+        menuBar = new JMenuBar();
         JMenu AnotacoesMenu = new JMenu("Anotações");
         JMenuItem openItem = new JMenuItem("Abrir");
 
@@ -77,10 +80,11 @@ public class AgendaApp extends JFrame {
 
         AnotacoesMenu.add(openItem);
         menuBar.add(AnotacoesMenu);
-        this.setJMenuBar(menuBar);
+
     }
 
-    private void finalizeInitialization() {
+    private void AdicionarAoFrame() {
+        this.setJMenuBar(menuBar);
         this.add(rightContainer, BorderLayout.CENTER);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);

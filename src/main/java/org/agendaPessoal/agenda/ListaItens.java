@@ -11,6 +11,9 @@ import javax.swing.JScrollPane;
 
 import org.agendaPessoal.entidades.ListaItensAgendados;
 
+/**
+ * Painel que mostra todas as tarefas organizadas por data
+ */
 public class ListaItens extends JPanel {
 
     public ListaItens() {

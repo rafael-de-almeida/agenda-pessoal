@@ -1,2 +1,2 @@
 Para criar um novo arquivo acesse arquivos -> novo arquivo
-!! Lembre - se de salvar o arquivo antes de mudar para outro arquivo ou fechar o programa -> salva 
+!! Lembre - se de salvar o arquivo antes de mudar para outro arquivo ou fechar o programa arquivos-> salvar 

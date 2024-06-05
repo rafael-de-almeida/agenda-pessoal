@@ -7,6 +7,9 @@ import javax.swing.JScrollPane;
 
 import org.agendaPessoal.entidades.ListaItensAgendados;
 
+/**
+ * painel que mostra todas as atividades do dia selecionado
+ */
 public class ListaItensDoDia extends JPanel {
 
     public ListaItensDoDia() {

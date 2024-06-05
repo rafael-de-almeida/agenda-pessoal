@@ -1,4 +1,4 @@
-package org.agendaPessoal.anotacao;
+package org.agendaPessoal.entidades;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,6 +9,9 @@ import java.io.IOException;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
+/**
+ * Classe responsável por gerenciar operações em arquivos
+ */
 public class FileManager {
     private static final String PATH = "src/main/java/org/agendaPessoal/data";
 
@@ -45,7 +48,7 @@ public class FileManager {
                 continue;
             }
 
-        } while (filename == null);
+        } while (filename != null);
         return filename;
     }
 

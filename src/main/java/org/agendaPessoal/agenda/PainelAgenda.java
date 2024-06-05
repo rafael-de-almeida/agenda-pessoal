@@ -18,6 +18,9 @@ import org.agendaPessoal.entidades.ItemAgendado;
 import org.agendaPessoal.entidades.ListaItensAgendados;
 import org.agendaPessoal.entidades.MapItensAgendados;
 
+/**
+ * Gerencia todas as classes relacionadas a agenda
+ */
 public class PainelAgenda extends JLayeredPane {
     public PainelAgenda(MapItensAgendados mapItensAgendados, CalendarioPanel calendarioUI,
             ListaItensDoDia listaItensDoDia,
@@ -45,16 +48,22 @@ public class PainelAgenda extends JLayeredPane {
                 calendarioUI.getTabelaCalendario().repaint();
                 listaItensDoDia.update(lista);
                 itensAgendadosPanel.update(mapItensAgendados.getItensAgendadosOrdered());
-            } else {
-                NewItem newItem = new NewItem();
-                newItem.setVisible(true);
             }
-
         });
 
-        this.add(tabbedPane, JLayeredPane.DEFAULT_LAYER);
-        this.add(button, JLayeredPane.PALETTE_LAYER);
-        this.add(titleForm, JLayeredPane.PALETTE_LAYER);
+        titleForm.addActionListener(ae -> {
+            String titulo = titleForm.getText().trim();
+            if (!titulo.isEmpty()) {
+                titleForm.setText("");
+
+                mapItensAgendados.addItemAgendado(calendarioUI.getModeloCalendario().getLocalDate(),
+                        new ItemAgendado(titulo, calendarioUI.getModeloCalendario().getLocalDate().atStartOfDay()));
+                ListaItensAgendados lista = mapItensAgendados.get(calendarioUI.getModeloCalendario().getLocalDate());
+                calendarioUI.getTabelaCalendario().repaint();
+                listaItensDoDia.update(lista);
+                itensAgendadosPanel.update(mapItensAgendados.getItensAgendadosOrdered());
+            }
+        });
 
         this.addComponentListener(new ComponentAdapter() {
             @Override
@@ -68,6 +77,11 @@ public class PainelAgenda extends JLayeredPane {
                         titleForm.getPreferredSize().width, titleForm.getPreferredSize().height);
             }
         });
+
+        this.add(tabbedPane, JLayeredPane.DEFAULT_LAYER);
+        this.add(button, JLayeredPane.PALETTE_LAYER);
+        this.add(titleForm, JLayeredPane.PALETTE_LAYER);
+
     }
 
 }
