@@ -40,15 +40,15 @@ public class FileManager {
     public String gerarNovoArquivo() {
         String filename;
         File file = null;
+        boolean isFilenameNew = false;
         do {
             filename = JOptionPane.showInputDialog("Enter the filename:");
             file = new File(PATH + "/" + filename);
             if (file.exists()) {
                 JOptionPane.showMessageDialog(null, "A file with this name already exists.");
-                continue;
+                isFilenameNew = true;
             }
-
-        } while (filename != null);
+        } while (isFilenameNew && filename != null);
         return filename;
     }
 

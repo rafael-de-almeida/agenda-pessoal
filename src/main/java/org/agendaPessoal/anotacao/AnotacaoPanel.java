@@ -51,7 +51,6 @@ public class AnotacaoPanel extends JFrame {
                     fileManager.salvarArquivo(filename, area.getText());
                     atualizarLista(filename);
                 }
-
             }
         });
         saveItem.addActionListener(new ActionListener() {
